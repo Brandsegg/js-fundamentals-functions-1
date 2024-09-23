@@ -10,6 +10,14 @@
 //
 // TODO: write code below
 
+function arrayBetween(lower, upper) {
+  const arr = []
+  for (let i = lower; i <= upper; i++) {
+    arr.push(i)
+  }
+  return arr
+}
+
 // 2. define a function that takes two arguments: a string and a number.
 // The function should return the same string but in upper case with exclamation
 // marks appended to the end. The number of exclamation marks should be
@@ -21,6 +29,14 @@
 // error, 10    | ERROR!!!!!!!!!!
 //
 // TODO: write code below
+
+function makeTextAgressive(text, numEx) {
+  let agressiveStr = text.toUpperCase()
+  for (let i = 0; i < numEx; i++) {
+    agressiveStr += '!'
+  }
+  return agressiveStr
+}
 
 // 3. define a function that takes two arguments: a string and a number.
 // The function should return the new time in 24hr time after adding the additional time in minutes.
@@ -34,9 +50,35 @@
 // '23:50', 30  | '00:20'
 // TODO: write code below
 
+function addMinutes(time, minutesAdded) {
+  const timeArray = time.split(':')
+
+  let minutes = Number(timeArray[1]) + minutesAdded
+  let hours = Number(timeArray[0])
+
+  while (minutes > 60) {
+    hours++
+    minutes -= 60
+    if (hours > 23) {
+      hours = 0
+    }
+  }
+
+  let minutesString = minutes.toString()
+  let hoursString = hours.toString()
+
+  if (hours === 0) hoursString = '00'
+
+  if (minutes < 10) {
+    minutesString = `0${minutes}`
+  }
+
+  return hoursString + ':' + minutesString
+}
+
 // TODO: change the exported value to be the name of the function you defined
 module.exports = {
-  a: undefined, // 1. change undefined to be the name of the function defined to create the range of numbers (the first todo)
-  b: undefined, // 2. change undefined to be the name of the function defined to return the string with exclamations (the second todo)
-  c: undefined // etc
+  a: arrayBetween, // 1. change undefined to be the name of the function defined to create the range of numbers (the first todo)
+  b: makeTextAgressive, // 2. change undefined to be the name of the function defined to return the string with exclamations (the second todo)
+  c: addMinutes // etc
 }
